@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Son Dakika Akışı</title>
+
+    <style>
+      :root{
+        --bg:#0f1419;
+        --panel:#0b1117;
+        --border: rgba(255,255,255,.10);
+        --text:#e7e9ea;
+        --muted: rgba(231,233,234,.65);
+      }
+
+      * { box-sizing: border-box; }
+      html, body {
+        height: 100%;
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        height: 64px;
+        background: rgba(11,17,23,.92);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .header-inner{
+        width: 100%;
+        max-width: 980px;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 1px solid var(--border);
+      }
+
+      .title-wrap{
+        display:flex;
+        flex-direction: column;
+        line-height: 1.1;
+      }
+
+      .title{
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: .2px;
+      }
+
+      .subtitle{
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      .page {
+        min-height: calc(100vh - 64px);
+        padding: 16px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .timeline-wrapper {
+        width: 100%;
+        max-width: 980px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header-inner">
+        <img class="logo" src="./logo.jpg" alt="Logo" />
+        <div class="title-wrap">
+          <div class="title">Son Dakika Akışı</div>
+          <div class="subtitle">x.com/sondakika</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="timeline-wrapper">
+        <a
+          class="twitter-timeline"
+          href="https://x.com/sondakika"
+          data-theme="dark"
+          data-chrome="nofooter noborders"
+        >
+          Tweets by sondakika
+        </a>
+      </div>
+    </main>
+
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script>
+      function setHeight() {
+        const el = document.querySelector(".twitter-timeline");
+        if (!el) return;
+        const h = Math.max(500, window.innerHeight - 64 - 32);
+        el.setAttribute("data-height", String(h));
+        if (window.twttr?.widgets?.load) window.twttr.widgets.load();
+      }
+      window.addEventListener("load", setHeight);
+      window.addEventListener("resize", setHeight);
+    </script>
+  </body>
+</html>
